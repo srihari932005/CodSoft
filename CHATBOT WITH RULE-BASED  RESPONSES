@@ -1,0 +1,37 @@
+def chatbot():
+    print("Chatbot: Hi! I'm an advanced chatbot. How can I assist you today?")
+    while True:
+        user_input = input("You: ").lower()
+
+        # Greetings
+        if "hello" in user_input or "hi" in user_input:
+            print("Chatbot: Hello! How can I assist you today?")
+        # Asking about the chatbot
+        elif "how are you" in user_input:
+            print("Chatbot: I'm just a program, but I'm functioning perfectly. How are you?")
+        elif "your name" in user_input:
+            print("Chatbot: I'm ChatGPT, your friendly assistant. What's your name?")
+        elif "what can you do" in user_input:
+            print("Chatbot: I can help answer questions, chat with you, and provide useful information. What do you need?")
+        # Help-related responses
+        elif "help" in user_input:
+            print("Chatbot: Sure, I can help! Please provide more details about what you need assistance with.")
+        # Small talk
+        elif "weather" in user_input:
+            print("Chatbot: I can't check the weather right now, but you can try asking your local weather service.")
+        elif "joke" in user_input:
+            print("Chatbot: Why did the scarecrow win an award? Because he was outstanding in his field!")
+        elif "time" in user_input:
+            from datetime import datetime
+            print(f"Chatbot: The current time is {datetime.now().strftime('%H:%M:%S')}.")
+        # Goodbye messages
+        elif "bye" in user_input or "exit" in user_input:
+            print("Chatbot: Goodbye! It was nice talking to you. Have a great day!")
+            break
+        # Unrecognized input
+        else:
+            print("Chatbot: I'm not sure I understand. Can you rephrase that?")
+
+# Run the chatbot
+if _name_ == "_main_":
+    chatbot()
