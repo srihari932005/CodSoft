@@ -1,0 +1,48 @@
+class Item:
+    def _init_(self, title, genre):
+        self.title = title
+        self.genre = genre
+
+# Sample data
+items = [
+    Item("The Shawshank Redemption", "Drama"),
+    Item("The Godfather", "Crime, Drama"),
+    Item("The Dark Knight", "Action, Crime, Drama"),
+    Item("Pulp Fiction", "Crime, Drama"),
+    Item("Schindler's List", "Biography, Drama, History")
+]
+
+# Function to calculate similarity between two genre strings
+def calculate_similarity(genre1, genre2):
+    genres1 = set(genre1.lower().split(", "))  # Make the comparison case-insensitive
+    genres2 = set(genre2.lower().split(", "))
+    matches = genres1.intersection(genres2)
+    return len(matches)  # Simple similarity based on matching genres
+
+# Recommendation function
+def recommend(title, num_recommendations):
+    # Find the index of the item with the given title
+    index = next((i for i, item in enumerate(items) if item.title.lower() == title.lower()), None)
+
+    if index is None:
+        print("Item not found.")
+        return
+
+    similarities = []
+    for i, item in enumerate(items):
+        if i != index:
+            similarity = calculate_similarity(items[index].genre, item.genre)
+            similarities.append((similarity, i))
+        else:
+            similarities.append((-1.0, i))  # Exclude self
+
+    # Sort by similarity and get top recommendations
+    similarities.sort(reverse=True, key=lambda x: x[0])
+
+    print(f"Recommendations for '{title}':")
+    for rec in range(num_recommendations):
+        if rec < len(similarities) and similarities[rec][0] > 0:
+            print(f"Recommendation {rec + 1}: {items[similarities[rec][1]].title}")
+
+# Test the recommendation function
+recommend("The Godfather", 2)
